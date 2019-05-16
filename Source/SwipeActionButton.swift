@@ -55,6 +55,7 @@ class SwipeActionButton: UIButton {
         accessibilityLabel = action.accessibilityLabel
         
         setTitle(action.title, for: .normal)
+        setAttributedTitle(action.attributedTitle, for: .normal)
         setTitleColor(tintColor, for: .normal)
         setTitleColor(highlightedTextColor, for: .highlighted)
         setImage(action.image, for: .normal)
@@ -78,6 +79,11 @@ class SwipeActionButton: UIButton {
     }
     
     func titleBoundingRect(with size: CGSize) -> CGRect {
+        if let attributedTitle = attributedTitle(for: .normal) {
+            return attributedTitle.boundingRect(with: size,
+                                                options: [.usesFontLeading, .usesLineFragmentOrigin],
+                                                context: nil).integral
+        }
         guard let title = currentTitle, let font = titleLabel?.font else { return .zero }
         
         return title.boundingRect(with: size,

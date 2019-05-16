@@ -29,6 +29,11 @@ public class SwipeAction: NSObject {
     ///
     /// - note: You must specify a title or an image.
     public var title: String?
+
+    /// The attributed title of the action button.
+    ///
+    /// - note: You must specify a title or an image.
+    public var attributedTitle: NSAttributedString?
     
     /// The style applied to the action button.
     public var style: SwipeActionStyle
@@ -93,6 +98,19 @@ public class SwipeAction: NSObject {
     */
     public init(style: SwipeActionStyle, title: String?, handler: ((SwipeAction, IndexPath) -> Void)?) {
         self.title = title
+        self.style = style
+        self.handler = handler
+    }
+
+    /**
+     Constructs a new `SwipeAction` instance.
+
+     - parameter style: The attributed style of the action button.
+     - parameter attributedTitle: The title of the action button.
+     - parameter handler: The closure to execute when the user taps the button associated with this action.
+     */
+    public init(style: SwipeActionStyle, attributedTitle: NSAttributedString?, handler: ((SwipeAction, IndexPath) -> Void)?) {
+        self.attributedTitle = attributedTitle
         self.style = style
         self.handler = handler
     }
